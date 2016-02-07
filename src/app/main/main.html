@@ -1,31 +1,20 @@
-<div class="container">
+<div class="container" ng-controller="MainController">
 
-  <div>
-    <acme-navbar creation-date="main.creationDate"></acme-navbar>
-  </div>
-
-  <div class="jumbotron text-center">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">
-      <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-      Always a pleasure scaffolding your apps.
-    </p>
-    <p class="animated infinite" ng-class="main.classAnimation">
-      <button type="button" class="btn btn-lg btn-success" ng-click="main.showToastr()">Splendid Toastr</button>
-    </p>
-    <p>
-      With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']"></acme-malarkey>
-    </p>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-      <div class="thumbnail">
-        <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
-        <div class="caption">
-          <h3>{{ awesomeThing.title }}</h3>
-          <p>{{ awesomeThing.description }}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{ awesomeThing.url }}</a></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">EPAM Party Faces</h2>
+        <h3 class="section-subheading text-muted">These people will be there for sure</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 employee" ng-repeat="dude in registredPeople | filter:{firstName: fields.searchedValue}">
+        <div class="well">
+          <p class="text-center"><span class="glyphicon glyphicon-user"></span></p>
+          <h4 ng-bind="::dude.firstName +' '+ dude.lastName"></h4>
+          <h4 ng-bind="::dude.email"></h4>
+          <p class="status-text" ng-bind="::statuses(dude.willBeAtTheParty)" ng-class="getMessageColor(dude.willBeAtTheParty)"></p>
+          <p class="status-text" ng-bind="'Guest: ' + dude.broughtName" ng-class="getMessageColor(dude.bringingOnePlus)"></p>
         </div>
       </div>
     </div>

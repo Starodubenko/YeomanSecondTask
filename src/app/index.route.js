@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -13,6 +13,10 @@
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      })
+      .state('register', {
+        url: '/sign-up',
+        template: '<register></register>'
       });
 
     $urlRouterProvider.otherwise('/');

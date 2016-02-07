@@ -1,0 +1,156 @@
+<!-- REGISTER PAGE -->
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- PAGE TITLE -->
+    <div class="page-header">
+      <h1>
+        <span class="glyphicon glyphicon-fire"></span>Register</h1>
+    </div>
+
+    <!--<div class="dropdown" style="margin-bottom: 100px;">-->
+      <!--<input type="text" class="form-control" ng-model="accessebleFirstName"/>-->
+      <!--<ul class="dropdown-menu" ng-class="{dropped: accessebleFirstName}">-->
+        <!--<li ng-repeat="dude in registredPeople | possibleNamesFilters | filter:{firstName: accessebleFirstName,-->
+                                                                                 <!--lastName: accessebleLastName}">-->
+          <!--<a class="found-user" href="" ng-click="selectDroppedFirstName($event)">{{dude.firstName}}</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="dropdown" style="margin-bottom: 100px;">-->
+      <!--<input type="text" class="form-control" ng-model="accessebleLastName"/>-->
+      <!--<ul class="dropdown-menu" ng-class="{dropped: accessebleLastName}">-->
+        <!--<li ng-repeat="dude in registredPeople | filter:{firstName: accessebleFirstName,-->
+                                                          <!--lastName: accessebleLastName}">-->
+          <!--<a class="found-user" href="" ng-click="selectDroppedLastName($event)">{{dude.lastName}}</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+
+    <!-- FORM -->
+    <form name="form" novalidate>
+      <div id="firstName-group" class="form-group">
+        <div ng-show="form.$submitted || form.uFirstName.$touched" class="error-container">
+          <div class="alert alert-danger" ng-show="form.uFirstName.$error.required">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.require | sprintf:'first name'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.uFirstName.$error.minlength">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.minlength | sprintf:'3'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.uFirstName.$error.maxlength">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.maxlength | sprintf:'20'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.$error.userNotExist">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.userNotExist"></span>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <label>First Name</label>
+          <input type="text" class="form-control" ng-model="user.firstName" name="uFirstName" ng-maxlength="20"
+                 ng-minlength="3" required/>
+          <ul class="dropdown-menu" ng-class="{dropped: form.uFirstName.$viewValue}">
+            <li ng-repeat="dude in possiblePeople | possibleNamesFilters | filter:{firstName: form.uFirstName.$viewValue,
+                                                                                   lastName: form.uLastName.$viewValue}">
+              <a class="found-user" href="" ng-click="selectDroppedFirstName($event)">{{dude.firstName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="lastName-group" class="form-group">
+        <div ng-show="form.$submitted || form.uLastName.$touched" class="error-container">
+          <div class="alert alert-danger" ng-show="form.uLastName.$error.required">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.require | sprintf:'last name'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.uLastName.$error.minlength">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.minlength | sprintf:'3'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.uLastName.$error.maxlength">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.maxlength | sprintf:'20'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.$error.userNotExist">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.userNotExist"></span>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <label>Last Name</label>
+          <input type="text" class="form-control" ng-model="user.lastName" name="uLastName" ng-maxlength="20"
+                 ng-minlength="3" required/>
+          <ul class="dropdown-menu" ng-class="{dropped: form.uLastName.$viewValue}">
+            <li ng-repeat="dude in possiblePeople | filter:{firstName: form.uFirstName.$viewValue,
+                                                             lastName: form.uLastName.$viewValue}">
+              <a class="found-user" href="" ng-click="selectDroppedLastName($event)">{{dude.lastName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="email-group" class="form-group">
+        <div ng-show="form.$submitted || form.uEmail.$touched" class="error-container">
+          <div class="alert alert-danger" ng-show="form.uEmail.$error.required">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.require | sprintf:'email name'"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.uEmail.$error.email">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.email"></span>
+          </div>
+          <div class="alert alert-danger" ng-show="form.uEmail.$error.minlength">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.minlength | sprintf:'5'"></span>
+          </div>
+        </div>
+        <label>Email</label>
+        <input type="email" class="form-control" ng-model="user.email" name="uEmail" ng-minlength="3" required>
+      </div>
+
+      <div id="interested-group" class="form-group">
+        <div ng-show="form.$submitted || form.uEmail.$touched" class="error-container">
+          <div class="alert alert-danger" ng-show="form.uWillBeAtTheParty.$error.required">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span>
+            <span ng-bind="getErrorMessage.require | sprintf:'status'"></span>
+          </div>
+        </div>
+        <label>Are you going to be there?</label>
+        <select class="form-control" ng-model="user.willBeAtTheParty" name="uWillBeAtTheParty" required>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="maybe">Maybe</option>
+        </select>
+      </div>
+      <div id="guest-group" class="checkbox">
+        <label><input type="checkbox" ng-model="user.bringingOnePlus" name="uBringingOnePlus">I'm bringing a +1</label>
+      </div>
+      <div id="guest-name" class="form-group">
+        <label>Name of Guest</label>
+        <input type="text" class="form-control" ng-model="user.broughtName" name="uBringingOnePlus"
+               ng-disabled="!user.bringingOnePlus" ng-required="user.bringingOnePlus"/>
+      </div>
+      <!-- SUBMIT BUTTON -->
+      <button type="submit" ng-disabled="!form.$valid || (!form.$valid && !user.bringingOnePlus)" ng-click="regUser()"
+              class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-flash"></span> Submit!
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.error-container{
+  position: absolute;
+  left: 560px;
+  right: -300px;
+  min-width: 200px;
+  text-align: center;
+  color: red;
+}
+.error-container > div{
+  position: relative;
+  top: 21px;
+  padding: 0 15px;
+  min-height: 40px;
+  max-height: 40px;
+}
+.ng-valid{
+  border-color: #00DD00;
+}
+
+.dropped{
+  display: block;
+}

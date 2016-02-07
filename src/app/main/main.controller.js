@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,34 +6,34 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
-    var vm = this;
+  function MainController($scope) {
+    var messageColors = {
+      yes: "will-be",
+      no: "will-not-be",
+      maybe: "maybe-will-be",
+      true: "brought"
+    };
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1454600899108;
-    vm.showToastr = showToastr;
+    var statuses = {
+      yes: "Will be there",
+      no: "Won't be there",
+      maybe: "Will be there, maybe"
+    };
 
-    activate();
+    $scope.statuses = function(status){
+      return statuses[status];
+    };
 
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
+    $scope.getMessageColor = function(status){
+      return messageColors[status];
+    };
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
-
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
-    }
+    //$scope.regNew = function () {
+    //  $scope.registredPeople.put({})
+    //};
+    //
+    //$scope.$on('registredUser',function(data){
+    //  $scope.registredPeople.push(data);
+    //});
   }
 })();
