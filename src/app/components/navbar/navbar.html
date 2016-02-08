@@ -4,7 +4,18 @@
       <div class="navbar-header">
         <a class="navbar-brand" ui-sref="home">EPAM Grill Party</a>
       </div>
+
+      <select ng-show="currentNav == 'home'" id="asc-desc-people"
+              class="form-control" ng-model="fields.ascDesc">
+        <option ng-value="true">Descending</option>
+        <option ng-value="false">Ascending</option>
+      </select>
       <input ng-show="currentNav == 'home'" ng-model="fields.searchedValue" ng-keydown="search()" id="search-people" type="text" class="form-control">
+      <div ng-show="currentNav == 'home'" class="checkbox" id="attending-people">
+        <label>
+          <input type="checkbox" ng-model="fields.attending"> Will attend
+        </label>
+      </div>
       <ul class="nav navbar-nav navbar-right">
         <li ng-class="{active: currentNav == 'home'}">
           <a ui-sref="home">

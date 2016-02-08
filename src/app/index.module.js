@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('yeomanSecondTask', ['ngResource', 'ui.router', 'ui.bootstrap', 'toastr', 'sprintf']);
+    .module('yeomanSecondTask', ['ngResource', 'ui.router', 'ui.bootstrap', 'toastr', 'ngAnimate', 'sprintf']);
 
 })();

@@ -26,3 +26,20 @@
   min-height: 185px;
 }
 
+.employee.ng-enter{
+  animation: showOn 0.5s ease-in;
+}
+
+.employee.ng-leave{
+  animation: hideOut 0.5s ease-in;
+}
+
+@keyframes showOn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes hideOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}

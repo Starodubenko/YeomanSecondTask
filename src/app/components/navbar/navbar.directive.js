@@ -21,18 +21,33 @@
 
   /** @ngInject */
   function NavbarController($rootScope, $scope, $location) {
-    //$scope.currentNav = "home";
-    $rootScope.fields = {};
+    $rootScope.fields = {
+      pageClass:''
+    };
 
-    $scope.$watch(function(){
+    var navigation = ["home", "sign-up"];
+    var oldNavIndex = -1;
+
+    var getAnimationCalss = function(newNav){
+      var newNavIndex = navigation.indexOf(newNav);
+      if (newNavIndex < oldNavIndex){
+        $rootScope.fields.pageClass = "left";
+      } else {
+        $rootScope.fields.pageClass = "right";
+      }
+      oldNavIndex = newNavIndex;
+    };
+
+    $scope.$watch(function () {
       return $location.path();
-    }, function(newValue, oldValue){
-      if (newValue != '/'){
+    }, function (newValue, oldValue) {
+      if (newValue != '/') {
         var currentNav = newValue.substring(1, newValue.length);
         $scope.currentNav = currentNav;
       } else {
         $scope.currentNav = "home";
       }
+      getAnimationCalss($scope.currentNav);
     });
 
     $rootScope.registredPeople = [
@@ -43,14 +58,6 @@
         willBeAtTheParty: 'yes',
         bringingOnePlus: true,
         broughtName: 'John Smith'
-      },
-      {
-        firstName: 'Robert',
-        lastName: 'Smith',
-        email: 'Smith@gmail.com',
-        willBeAtTheParty: 'no',
-        bringingOnePlus: false,
-        broughtName: ''
       },
       {
         firstName: 'Robert',

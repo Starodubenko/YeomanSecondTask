@@ -3,7 +3,8 @@
 
   angular
     .module('yeomanSecondTask')
-    .config(routerConfig);
+    .config(routerConfig)
+    .controller('routerAnimateController', routerAnimateController);
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
@@ -21,5 +22,4 @@
 
     $urlRouterProvider.otherwise('/');
   }
-
 })();

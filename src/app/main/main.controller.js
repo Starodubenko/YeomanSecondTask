@@ -3,10 +3,22 @@
 
   angular
     .module('yeomanSecondTask')
-    .controller('MainController', MainController);
+    .controller('MainController', MainController)
+    .filter('attendingFilter', attendingFilter);
+
+  /** @ngInject */
+  function attendingFilter() {
+    return function (input) {
+      input.forEach(function (e) {
+
+      });
+      return input;
+    };
+  }
 
   /** @ngInject */
   function MainController($scope) {
+    $scope.pageClass = 'right';
     var messageColors = {
       yes: "will-be",
       no: "will-not-be",
@@ -20,20 +32,22 @@
       maybe: "Will be there, maybe"
     };
 
-    $scope.statuses = function(status){
+    $scope.statuses = function (status) {
       return statuses[status];
     };
 
-    $scope.getMessageColor = function(status){
+    $scope.getMessageColor = function (status) {
       return messageColors[status];
     };
 
-    //$scope.regNew = function () {
-    //  $scope.registredPeople.put({})
-    //};
-    //
-    //$scope.$on('registredUser',function(data){
-    //  $scope.registredPeople.push(data);
-    //});
+    $scope.stringToBool = function(val){
+      if (val == "true") return true;
+      if (val == "false") return false;
+    };
+
+    $scope.boolToStatus = function(val){
+      if (val == true) return "yes";
+      if (val == false) return "no";
+    }
   }
 })();

@@ -8,7 +8,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 employee" ng-repeat="dude in registredPeople | filter:{firstName: fields.searchedValue}">
+      <div class="col-sm-4 employee" ng-repeat="dude in registredPeople
+                                              | filter:{firstName: fields.searchedValue, willBeAtTheParty: boolToStatus(fields.attending)}
+                                              | orderBy:'firstName': stringToBool(fields.ascDesc)">
         <div class="well">
           <p class="text-center"><span class="glyphicon glyphicon-user"></span></p>
           <h4 ng-bind="::dude.firstName +' '+ dude.lastName"></h4>

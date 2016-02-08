@@ -27,6 +27,40 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   }
 }
 
+@keyframes slideOutLeft {
+  to      { transform: translateX(-100%); }
+}
+
+@keyframes slideOutRight {
+  to      { transform: translateX(+100%); }
+}
+
+@keyframes slideInLeft {
+  from    { transform: translateX(-100%); }
+  to      { transform: translateX(30%); }
+}
+
+@keyframes slideInRight {
+  from    { transform: translateX(+150%); }
+  to      { transform: translateX(35%); }
+}
+
+.ng-enter.left{
+  animation: slideInLeft 0.5s ease-in;
+  position: absolute;
+}
+.ng-leave.left {
+  animation: slideOutRight 0.5s ease-in;
+}
+.ng-enter.right{
+  animation: slideInRight 0.5s ease-in;
+  position: absolute;
+
+}
+.ng-leave.right{
+  animation: slideOutLeft 0.5s ease-in;
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
