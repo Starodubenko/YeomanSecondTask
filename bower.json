@@ -28,6 +28,12 @@
         "assets/fonts/bootstrap/glyphicons-halflings-regular.woff",
         "assets/fonts/bootstrap/glyphicons-halflings-regular.woff2"
       ]
+    },
+    "sprintf": {
+      "main": [
+        "dist/angular-sprintf.min.js",
+        "dist/sprintf.min.js"
+      ]
     }
   },
   "resolutions": {

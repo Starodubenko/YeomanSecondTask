@@ -3,18 +3,7 @@
 
   angular
     .module('yeomanSecondTask')
-    .controller('MainController', MainController)
-    .filter('attendingFilter', attendingFilter);
-
-  /** @ngInject */
-  function attendingFilter() {
-    return function (input) {
-      input.forEach(function (e) {
-
-      });
-      return input;
-    };
-  }
+    .controller('MainController', MainController);
 
   /** @ngInject */
   function MainController($scope) {

@@ -39,6 +39,7 @@
     /** @ngInject */
     function RegisterController($rootScope, $scope, $location) {
 
+
       $scope.getErrorMessage = {
         userNotExist: "There is no such employee",
         require: "You should say to us your %s =)",
@@ -92,21 +93,33 @@
 
       $scope.$watch('form.uFirstName.$viewValue', function (newValue, oldValue) {
         if (newValue) {
-          $scope.form.$error.userNotExist = !checkFirstName(newValue);
+          var result = !checkFirstName(newValue);
+          if (result){
+            $scope.form.$error.userNotExist = true;
+          } else {
+            var error = $scope.form.$error;
+            delete $scope.form.$error['userNotExist'];
+          }
         }
       });
 
       $scope.$watch('form.uLastName.$viewValue', function (newValue, oldValue) {
         if (newValue) {
-          $scope.form.$error.userNotExist = !checkLastName(newValue);
+          var result = !checkLastName(newValue);
+          if (result){
+            $scope.form.$error.userNotExist = true;
+          } else {
+            var error = $scope.form.$error;
+            delete $scope.form.$error['userNotExist'];
+          }
         }
       });
 
-      $scope.selectDroppedFirstName = function(e){
+      $scope.selectDroppedFirstName = function (e) {
         angular.element(e.target.parentElement.parentElement).removeClass('dropped');
         $scope.user.firstName = e.target.text;
       };
-      $scope.selectDroppedLastName = function(e){
+      $scope.selectDroppedLastName = function (e) {
         angular.element(e.target.parentElement.parentElement).removeClass('dropped');
         $scope.user.lastName = e.target.text;
       };
@@ -116,8 +129,12 @@
         $location.path('/home').replace();
       };
 
-      $scope.dropDownMenu = function(e){
+      $scope.dropDownMenu = function (e) {
         var el = angular.element(e.parentElement.parentElement)
+      };
+
+      $scope.onTheEnter = function () {
+        alert($scope.form.$error)
       }
     }
   }
