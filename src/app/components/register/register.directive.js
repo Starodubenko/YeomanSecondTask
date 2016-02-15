@@ -37,9 +37,7 @@
     return directive;
 
     /** @ngInject */
-    function RegisterController($rootScope, $scope, $location) {
-
-
+    function RegisterController($rootScope, $scope, $location, EmployeeService) {
       $scope.getErrorMessage = {
         userNotExist: "There is no such employee",
         require: "You should say to us your %s =)",
@@ -57,19 +55,21 @@
         broughtName: ''
       };
 
-      $scope.$watch('form.uEmail.$viewValue', function (newValue, oldValue) {
+      $scope.$watch('form.uEmail.$viewValue', function (newValue) {
         if (newValue) {
           var domain = newValue.substring(newValue.indexOf("@") + 1, newValue.leading);
           if (domain != "epam.com") {
             $scope.form.uEmail.$error.email = true;
           }
         }
-      })
-      ;
+      });
+
+      $scope.possiblePeople = EmployeeService.getPossiblePeopleList();
 
       var checkFirstName = function (firstName) {
         var result = false;
-        $rootScope.possiblePeople.some(function (e) {
+        // $rootScope.possiblePeople.some(function (e) {
+        EmployeeService.getPossiblePeopleList().some(function (e) {
           if (e.firstName == firstName) {
             if ($scope.user.lastName == e.lastName) {
               result = true;
@@ -81,7 +81,7 @@
 
       var checkLastName = function (lastName) {
         var result = false;
-        $rootScope.possiblePeople.some(function (e) {
+        EmployeeService.getPossiblePeopleList().some(function (e) {
           if (e.lastName == lastName) {
             if ($scope.user.firstName == e.firstName) {
               result = true;
@@ -91,25 +91,23 @@
         return result;
       };
 
-      $scope.$watch('form.uFirstName.$viewValue', function (newValue, oldValue) {
+      $scope.$watch('form.uFirstName.$viewValue', function (newValue) {
         if (newValue) {
           var result = !checkFirstName(newValue);
           if (result){
             $scope.form.$error.userNotExist = true;
           } else {
-            var error = $scope.form.$error;
             delete $scope.form.$error['userNotExist'];
           }
         }
       });
 
-      $scope.$watch('form.uLastName.$viewValue', function (newValue, oldValue) {
+      $scope.$watch('form.uLastName.$viewValue', function (newValue) {
         if (newValue) {
           var result = !checkLastName(newValue);
           if (result){
             $scope.form.$error.userNotExist = true;
           } else {
-            var error = $scope.form.$error;
             delete $scope.form.$error['userNotExist'];
           }
         }
@@ -125,12 +123,12 @@
       };
 
       $scope.regUser = function () {
-        var success = $rootScope.registredPeople.push($scope.user);
+        EmployeeService.getRegistredPeopleList().push($scope.user);
         $location.path('/home').replace();
       };
 
       $scope.dropDownMenu = function (e) {
-        var el = angular.element(e.parentElement.parentElement)
+        angular.element(e.parentElement.parentElement)
       };
 
       $scope.onTheEnter = function () {

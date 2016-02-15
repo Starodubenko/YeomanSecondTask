@@ -6,8 +6,9 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope) {
-    $scope.pageClass = 'right';
+  function MainController(EmployeeService) {
+    var vm = this;
+
     var messageColors = {
       yes: "will-be",
       no: "will-not-be",
@@ -21,20 +22,22 @@
       maybe: "Will be there, maybe"
     };
 
-    $scope.statuses = function (status) {
+    vm.registredPeopleList = EmployeeService.getRegistredPeopleList();
+
+    vm.statuses = function (status) {
       return statuses[status];
     };
 
-    $scope.getMessageColor = function (status) {
+    vm.getMessageColor = function (status) {
       return messageColors[status];
     };
 
-    $scope.stringToBool = function(val){
+    vm.stringToBool = function(val){
       if (val == "true") return true;
       if (val == "false") return false;
     };
 
-    $scope.boolToStatus = function(val){
+    vm.boolToStatus = function(val){
       if (val == true) return "yes";
       if (val == false) return "no";
     }

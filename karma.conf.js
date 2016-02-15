@@ -61,14 +61,15 @@ module.exports = function(config) {
       whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
     },
 
-    browsers : ['PhantomJS'],
+    browsers : ['Chrome'],
 
     plugins : [
+      'karma-chrome-launcher',
       'karma-phantomjs-launcher',
       'karma-angular-filesort',
       'karma-coverage',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-ng-html2js-preprocessor',
     ],
 
     coverageReporter: {
@@ -79,7 +80,7 @@ module.exports = function(config) {
     reporters: ['progress'],
 
     proxies: {
-      '/assets/': path.join('/base/', conf.paths.src, '/assets/')
+      '/assets/': path.join('/base/', conf.paths.src, '/assets/\\')
     }
   };
 
